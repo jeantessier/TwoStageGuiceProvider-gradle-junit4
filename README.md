@@ -54,9 +54,12 @@ are looking for:
 ```java
 package service;
 
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class TestServiceImpl {
     private Service sut;
@@ -115,10 +118,14 @@ implementation.  Here is a test for it:
 ```java
 package generic;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import org.junit.*;
-import service.*;
+import org.junit.Before;
+import org.junit.Test;
+import service.Service;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 public class TestGenericModule {
     private GenericModule sut;
@@ -148,8 +155,10 @@ And here is a generic Guice module with a provider method to create a plain
 ```java
 package generic;
 
-import com.google.inject.*;
-import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import service.Service;
+import service.ServiceImpl;
 
 public class GenericModule extends AbstractModule {
     protected void configure() {
@@ -181,17 +190,20 @@ specification, that it calls `setupClient1()` on an existing `Service` instance:
 ```java
 package client1;
 
-import static org.hamcrest.Matchers.*;
-import org.jmock.*;
-import org.jmock.integration.junit4.*;
-import static org.junit.Assert.*;
-import org.junit.*;
-import org.junit.runner.*;
-import service.*;
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import service.Service;
 
-@RunWith(JMock.class)
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+
 public class TestClient1Module {
-    private Mockery context = new Mockery();
+    @Rule
+    public final JUnitRuleMockery context = new JUnitRuleMockery();
 
     private Client1Module sut;
 
@@ -224,8 +236,10 @@ This hypothetical client No. 1 could use this module:
 ```java
 package client1;
 
-import com.google.inject.*;
-import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import service.Service;
+import service.ServiceImpl;
 
 public class Client1Module extends AbstractModule {
     protected void configure() {
@@ -246,17 +260,20 @@ A hypothetical client No. 2 could require this specification instead:
 ```java
 package client2;
 
-import static org.hamcrest.Matchers.*;
-import org.jmock.*;
-import org.jmock.integration.junit4.*;
-import static org.junit.Assert.*;
-import org.junit.*;
-import org.junit.runner.*;
-import service.*;
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import service.Service;
 
-@RunWith(JMock.class)
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+
 public class TestClient2Module {
-    private Mockery context = new Mockery();
+    @Rule
+    public final JUnitRuleMockery context = new JUnitRuleMockery();
 
     private Client2Module sut;
 
@@ -289,8 +306,10 @@ Which this implementation satisfies:
 ```java
 package client2;
 
-import com.google.inject.*;
-import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import service.Service;
+import service.ServiceImpl;
 
 public class Client2Module extends AbstractModule {
     protected void configure() {
@@ -325,8 +344,9 @@ I could rewrite `Client1Module` as:
 ```java
     package client1;
 
-    import com.google.inject.*;
-    import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import service.Service;
 
     public class Client1Module extends AbstractModule {
         protected void configure() {
@@ -366,9 +386,11 @@ First, I qualify the `Service` provided by `GenericModule` as "generic".
 ```java
 package generic;
 
-import com.google.inject.*;
-import com.google.inject.name.*;
-import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.name.Named;
+import service.Service;
+import service.ServiceImpl;
 
 public class GenericModule extends AbstractModule {
     protected void configure() {
@@ -389,9 +411,10 @@ it is explicit in the calling code which `Service` I am interested in.
 ```java
 package client1;
 
-import com.google.inject.*;
-import com.google.inject.name.*;
-import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.name.Named;
+import service.Service;
 
 public class Client1Module extends AbstractModule {
     protected void configure() {
@@ -422,9 +445,10 @@ Client No. 2 would use the following module to obtain a "client2" flavor of
 ```java
 package client2;
 
-import com.google.inject.*;
-import com.google.inject.name.*;
-import service.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.name.Named;
+import service.Service;
 
 public class Client2Module extends AbstractModule {
     protected void configure() {
@@ -453,10 +477,10 @@ kind of `Service`:
 ```java
 package client1;
 
-import com.google.inject.*;
-import com.google.inject.name.*;
-import generic.*;
-import service.*;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import generic.Client;
+import service.Service;
 
 public class Client1 extends Client {
     @Inject
@@ -471,10 +495,10 @@ And a `Client2` class that requires a "client2" kind of `Service`:
 ```java
 package client2;
 
-import com.google.inject.*;
-import com.google.inject.name.*;
-import generic.*;
-import service.*;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import generic.Client;
+import service.Service;
 
 public class Client2 extends Client {
     @Inject
@@ -489,7 +513,7 @@ Here is a simple, generic `Client` superclass:
 ```java
 package generic;
 
-import service.*;
+import service.Service;
 
 public class Client {
     private final Service service;

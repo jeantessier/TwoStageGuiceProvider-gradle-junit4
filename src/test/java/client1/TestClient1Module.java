@@ -1,20 +1,19 @@
 package client1;
 
 import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JMock;
+import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import service.Service;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
-@RunWith(JMock.class)
 public class TestClient1Module {
-    private Mockery context = new Mockery();
+    @Rule
+    public final JUnitRuleMockery context = new JUnitRuleMockery();
 
     private Client1Module sut;
 
@@ -33,7 +32,7 @@ public class TestClient1Module {
         final Service mockService = context.mock(Service.class);
 
         context.checking(new Expectations() {{
-            one (mockService).setupClient1();
+            oneOf (mockService).setupClient1();
         }});
 
         Service actualService = sut.provideService(mockService);
