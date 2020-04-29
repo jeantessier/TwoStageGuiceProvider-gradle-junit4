@@ -539,4 +539,4 @@ Date | Edit
 ---- | ----
 2009-01-28 | First draft.
 2009-01-29 | Last substantial edit.
-2020-04-27 | Making sure it all still works with the latest version of Guice.
+2020-04-28 | Making sure it all still works with the latest version of Guice.
