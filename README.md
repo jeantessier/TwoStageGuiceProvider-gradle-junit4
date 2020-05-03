@@ -118,7 +118,6 @@ implementation.  Here is a test for it:
 ```java
 package generic;
 
-import org.junit.Before;
 import org.junit.Test;
 import service.Service;
 
@@ -128,17 +127,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 public class TestGenericModule {
-    private GenericModule sut;
-
-    @Before
-    public void setUp() {
-        sut = new GenericModule();
-    }
-
-    @Test
-    public void testConfigure() {
-        sut.configure();
-    }
+    private GenericModule sut = new GenericModule();
 
     @Test
     public void testProvideService() {
@@ -161,10 +150,6 @@ import service.Service;
 import service.ServiceImpl;
 
 public class GenericModule extends AbstractModule {
-    protected void configure() {
-        // Do nothing.
-    }
-
     @Provides
     public Service provideService() {
         return new ServiceImpl();
@@ -192,7 +177,6 @@ package client1;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import service.Service;
@@ -205,17 +189,7 @@ public class TestClient1Module {
     @Rule
     public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-    private Client1Module sut;
-
-    @Before
-    public void setUp() {
-        sut = new Client1Module();
-    }
-
-    @Test
-    public void testConfigure() {
-        sut.configure();
-    }
+    private Client1Module sut = new Client1Module();
 
     @Test
     public void testProvideService() {
@@ -242,10 +216,6 @@ import service.Service;
 import service.ServiceImpl;
 
 public class Client1Module extends AbstractModule {
-    protected void configure() {
-        // Do nothing.
-    }
-
     @Provides
     public Service provideService() {
         Service service = new ServiceImpl();
@@ -262,7 +232,6 @@ package client2;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import service.Service;
@@ -275,17 +244,7 @@ public class TestClient2Module {
     @Rule
     public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-    private Client2Module sut;
-
-    @Before
-    public void setUp() {
-        sut = new Client2Module();
-    }
-
-    @Test
-    public void testConfigure() {
-        sut.configure();
-    }
+    private Client2Module sut = new Client2Module();
 
     @Test
     public void testProvideService() {
@@ -312,10 +271,6 @@ import service.Service;
 import service.ServiceImpl;
 
 public class Client2Module extends AbstractModule {
-    protected void configure() {
-        // Do nothing.
-    }
-
     @Provides
     public Service provideService() {
         Service service = new ServiceImpl();
@@ -349,10 +304,6 @@ import com.google.inject.Provides;
 import service.Service;
 
     public class Client1Module extends AbstractModule {
-        protected void configure() {
-            // Do nothing.
-        }
-
         @Provides
         public Service provideService(Service service) {
             service.setupClient1();
@@ -393,10 +344,6 @@ import service.Service;
 import service.ServiceImpl;
 
 public class GenericModule extends AbstractModule {
-    protected void configure() {
-        // Do nothing.
-    }
-
     @Provides
     @Named("generic")
     public Service provideService() {
@@ -417,10 +364,6 @@ import com.google.inject.name.Named;
 import service.Service;
 
 public class Client1Module extends AbstractModule {
-    protected void configure() {
-        // Do nothing.
-    }
-
     @Provides
     @Named("client1")
     public Service provideService(@Named("generic") Service service) {
@@ -451,10 +394,6 @@ import com.google.inject.name.Named;
 import service.Service;
 
 public class Client2Module extends AbstractModule {
-    protected void configure() {
-        // Do nothing.
-    }
-
     @Provides
     @Named("client2")
     public Service provideService(@Named("generic") Service service) {
@@ -564,3 +503,4 @@ Date | Edit
 2009-01-28 | First draft.
 2009-01-29 | Last substantial edit.
 2020-04-28 | Making sure it all still works with the latest version of Guice.
+2020-05-03 | Remove empty `configure()` methods that are no longer needed in Guice `4.2.3`.

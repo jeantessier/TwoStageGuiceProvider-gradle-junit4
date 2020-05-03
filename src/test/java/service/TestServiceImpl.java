@@ -1,6 +1,5 @@
 package service;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -8,12 +7,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class TestServiceImpl {
-    private Service sut;
-
-    @Before
-    public void setUp() {
-        sut = new ServiceImpl();
-    }
+    private Service sut = new ServiceImpl();
 
     @Test
     public void testDefault_StateEqualsGeneric() {

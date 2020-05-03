@@ -2,7 +2,6 @@ package client1;
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import service.Service;
@@ -15,17 +14,7 @@ public class TestClient1Module {
     @Rule
     public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-    private Client1Module sut;
-
-    @Before
-    public void setUp() {
-        sut = new Client1Module();
-    }
-
-    @Test
-    public void testConfigure() {
-        sut.configure();
-    }
+    private Client1Module sut = new Client1Module();
 
     @Test
     public void testProvideService() {

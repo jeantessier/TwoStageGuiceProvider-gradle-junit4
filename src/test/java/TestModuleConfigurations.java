@@ -9,7 +9,6 @@ import com.google.inject.Module;
 import com.google.inject.name.Names;
 import generic.Client;
 import generic.GenericModule;
-import org.junit.Before;
 import org.junit.Test;
 import service.Service;
 
@@ -18,12 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class TestModuleConfigurations {
-    private Module genericModule;
-
-    @Before
-    public void setUp() {
-        genericModule = new GenericModule();
-    }
+    private Module genericModule = new GenericModule();
 
     @Test
     public void testGettingServiceUsingClient1() {
