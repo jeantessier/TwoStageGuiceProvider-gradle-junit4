@@ -8,7 +8,7 @@ in turn.
 
 The finalized code makes up the rest of this repo.
 
-All examples use Guice 5.1.  They were tested with JUnit 4 and jMock 2.12 using
+All examples use Guice 7.0.  They were tested with JUnit 4 and jMock 2.12 using
 Java 17.
 
 ## Introduction
