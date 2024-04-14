@@ -14,7 +14,7 @@ public class TestClient2Module {
     @Rule
     public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-    private Client2Module sut = new Client2Module();
+    private final Client2Module sut = new Client2Module();
 
     @Test
     public void testProvideService() {

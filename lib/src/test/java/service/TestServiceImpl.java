@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestServiceImpl {
-    private Service sut = new ServiceImpl();
+    private final Service sut = new ServiceImpl();
 
     @Test
     public void testDefault_StateEqualsGeneric() {

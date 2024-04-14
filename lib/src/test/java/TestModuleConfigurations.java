@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestModuleConfigurations {
-    private Module genericModule = new GenericModule();
+    private final Module genericModule = new GenericModule();
 
     @Test
     public void testGettingServiceUsingClient1() {

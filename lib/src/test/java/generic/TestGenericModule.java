@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestGenericModule {
-    private GenericModule sut = new GenericModule();
+    private final GenericModule sut = new GenericModule();
 
     @Test
     public void testProvideService() {
