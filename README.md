@@ -297,7 +297,7 @@ provided by `Client1Module` and `Client2Module`.
 I could rewrite `Client1Module` as:
 
 ```java
-    package client1;
+package client1;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
