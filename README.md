@@ -303,13 +303,13 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import service.Service;
 
-    public class Client1Module extends AbstractModule {
-        @Provides
-        public Service provideService(Service service) {
-            service.setupClient1();
-            return service;
-        }
+public class Client1Module extends AbstractModule {
+    @Provides
+    public Service provideService(Service service) {
+        service.setupClient1();
+        return service;
     }
+}
 ```
 
 And use it like this:
