@@ -159,8 +159,10 @@ public class GenericModule extends AbstractModule {
 
 You can use it like this:
 
-    Injector injector = Guice.createInjector(new GenericModule());
-    Service service = injector.getInstance(Service.class);
+```java
+Injector injector = Guice.createInjector(new GenericModule());
+Service service = injector.getInstance(Service.class);
+```
 
 The variable `service` now references a plain `ServiceImpl`.
 
@@ -314,9 +316,11 @@ public class Client1Module extends AbstractModule {
 
 And use it like this:
 
-    Injector injector = Guice.createInjector(new GenericModule(), new Client1Module());
-    Service service = injector.getInstance(Service.class);
-
+```java
+Injector injector = Guice.createInjector(new GenericModule(), new Client1Module());
+Service service = injector.getInstance(Service.class);
+```
+    
 I would hope that Guice picks to call `Client1Module.provideService()` to
 satisfy my request and injects a `Service` into this call by calling
 `GenericModule.provideService()`.  But that's not the case.  Because I now have
@@ -379,8 +383,10 @@ latter requires a "generic" flavor of `Service`, which will be provided by
 `GenericModule.provideService()`.  The client simply asks for what it needs and
 lets Guice take care of the rest.
 
-    Injector injector = Guice.createInjector(new GenericModule(), new Client1Module());
-    Service service = injector.getInstance(Key.get(Service.class, Names.named("client1")));
+```java
+Injector injector = Guice.createInjector(new GenericModule(), new Client1Module());
+Service service = injector.getInstance(Key.get(Service.class, Names.named("client1")));
+```
 
 Client No. 2 would use the following module to obtain a "client2" flavor of
 `Service`.
@@ -405,8 +411,10 @@ public class Client2Module extends AbstractModule {
 
 And use it like this:
 
-    Injector injector = Guice.createInjector(new GenericModule(), new Client2Module());
-    Service service = injector.getInstance(Key.get(Service.class, Names.named("client2")));
+```java
+Injector injector = Guice.createInjector(new GenericModule(), new Client2Module());
+Service service = injector.getInstance(Key.get(Service.class, Names.named("client2")));
+```
 
 ## More Realistic
 
@@ -472,8 +480,10 @@ between clients No. 1 and No. 2.  It deals exclusively in terms of the generic
 `Service` interface.  Guice uses the configuration information to pick the
 right implementation and customize it appropriately.
 
-    Injector injector = Guice.createInjector(new GenericModule(), new Client1Module());
-    Client client = injector.getInstance(Client1.class);
+```java
+Injector injector = Guice.createInjector(new GenericModule(), new Client1Module());
+Client client = injector.getInstance(Client1.class);
+```
 
 ## Conclusion
 
