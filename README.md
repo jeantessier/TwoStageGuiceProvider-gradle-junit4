@@ -11,6 +11,11 @@ The finalized code makes up the rest of this repo.
 All examples use Guice 7.0.  They were tested with JUnit 4 and jMock 2.12 using
 Java 21.
 
+Alternative versions:
+JUnit 4,
+[JUnit 5](https://github.com/jeantessier/TwoStageGuiceProvider-gradle-junit5/blob/main/README.md),
+[Spock](https://github.com/jeantessier/TwoStageGuiceProvider-gradle-spock/blob/main/README.md)
+
 ## Introduction
 
 I got the idea for this pattern as I was trying to reuse a framework.  This
