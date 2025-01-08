@@ -18,7 +18,7 @@ public class TestClient1Module {
 
     @Test
     public void testProvideService() {
-        final Service mockService = context.mock(Service.class);
+        Service mockService = context.mock(Service.class);
 
         context.checking(new Expectations() {{
             oneOf (mockService).setupClient1();

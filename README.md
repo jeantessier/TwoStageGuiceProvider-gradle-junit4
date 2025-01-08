@@ -200,7 +200,7 @@ public class TestClient1Module {
 
     @Test
     public void testProvideService() {
-        final Service mockService = context.mock(Service.class);
+        Service mockService = context.mock(Service.class);
 
         context.checking(new Expectations() {{
             one (mockService).setupClient1();
@@ -255,7 +255,7 @@ public class TestClient2Module {
 
     @Test
     public void testProvideService() {
-        final Service mockService = context.mock(Service.class);
+        Service mockService = context.mock(Service.class);
 
         context.checking(new Expectations() {{
             one (mockService).setupClient2();
