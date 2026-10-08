@@ -1,7 +1,7 @@
 [versions]
 junit = "4.13.2"
 guice = "7.0.0"
-byte-buddy = "1.18.3"
+byte-buddy = "1.18.14"
 jmock = "2.13.1"
 
 [libraries]
